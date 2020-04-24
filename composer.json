@@ -1,0 +1,6 @@
+{
+  "require-dev": {
+    "phpunit/phpunit": "^9",
+    "guzzlehttp/guzzle": "^6.5"
+  }
+}
