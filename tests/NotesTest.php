@@ -5,23 +5,22 @@ use GuzzleHttp\Client as GuzzleHttp;
 
 final class NotesTest extends TestCase
 {
-    public function testInit()
+    static public function setUpBeforeClass(): void
     {
-        global $argv, $argc;
-        $this->assertGreaterThan(2, $argc, 'No environment name passed');
+        global $argv;
         file_put_contents(__DIR__ . "/../data/url", $argv[2]);
         // Reset database projects
-        /*
         $client = new GuzzleHttp([
             'base_uri' => file_get_contents(__DIR__ . "/../data/url")
         ]);
-        for ($i = 1; $i < 100; $i++) {
+        $response = $client->get('/api/notes');
+        $data = json_decode($response->getBody());
+        foreach ($data->notes as $note) {
             try {
-                $client->delete("/api/notes/{$i}");
+                $client->delete("/api/notes/{$note->id}");
             } catch (\GuzzleHttp\Exception\ClientException $e) {
             }
         }
-        */
     }
 
     public function testEmptyNotes()
